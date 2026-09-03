@@ -1,17 +1,26 @@
 {
   "version": 2,
-  "builds": [
-    {
-      "src": "**/*",
-      "use": "@vercel/static"
-    }
-  ],
+  "buildCommand": "echo 'Static site'",
+  "outputDirectory": ".",
   "routes": [
     {
+      "src": "/(.*\\..*)",
+      "dest": "/$1"
+    },
+    {
       "src": "/(.*)",
-      "headers": {
-        "cache-control": "public, max-age=0, s-maxage=0"
-      }
+      "dest": "/index.html"
+    }
+  ],
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "cache-control",
+          "value": "public, max-age=0, s-maxage=0"
+        }
+      ]
     }
   ]
 }
